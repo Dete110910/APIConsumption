@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">APIConsumption</string>
+    <string name="title_app">Consumo de una API</string>
+</resources>
