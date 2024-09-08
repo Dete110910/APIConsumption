@@ -1,19 +1,25 @@
 package com.example.apiconsumption
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.apiconsumption.data.api.models.User
 import com.example.apiconsumption.data.viewModel.UsersViewModel
 import com.example.apiconsumption.databinding.ActivityMainBinding
+import com.example.apiconsumption.ui.screens.banks.BanksActivity
+import com.example.apiconsumption.ui.screens.banks.BanksActivity.Companion.USER
 import com.example.apiconsumption.ui.screens.users.rv.RvUsersAdapter
+
+
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -32,7 +38,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRv() {
-        rvUsersAdapter = RvUsersAdapter()
+        rvUsersAdapter = RvUsersAdapter(
+            onBanksClickListener = { user ->
+                launchBanksActivity(user)
+            }
+        )
         binding.rvUsers.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = rvUsersAdapter
@@ -52,6 +62,21 @@ class MainActivity : AppCompatActivity() {
                 binding.pbUsers.visibility = if (uiState.isLoading.not()) View.INVISIBLE else View.VISIBLE
             }
         }
+    }
+
+    private fun launchBanksActivity(user: User){
+        startActivity(
+            Intent(
+                this,
+                BanksActivity::class.java
+            ).apply {
+                putExtras(
+                    bundleOf(
+                        USER to user
+                    )
+                )
+            }
+        )
     }
 
 }

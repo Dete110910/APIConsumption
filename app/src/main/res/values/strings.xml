@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">APIConsumption</string>
     <string name="title_app">Consumo de una API</string>
+    <string name="beers">Beers</string>
+    <string name="banks">Banks</string>
+    <string name="subscription_to_banks">This user has subscription to this banks: %1$s</string>
 </resources>

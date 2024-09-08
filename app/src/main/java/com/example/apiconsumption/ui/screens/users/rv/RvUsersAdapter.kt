@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.apiconsumption.data.api.models.User
 import com.example.apiconsumption.databinding.UserViewBinding
 
-class RvUsersAdapter() : RecyclerView.Adapter<UserViewHolder>(){
+class RvUsersAdapter(
+    private val onBanksClickListener: (user: User) -> Unit
+) : RecyclerView.Adapter<UserViewHolder>(){
 
     var users = emptyList<User>()
 
@@ -16,7 +18,10 @@ class RvUsersAdapter() : RecyclerView.Adapter<UserViewHolder>(){
             parent,
             false
         )
-        return UserViewHolder(binding)
+        return UserViewHolder(
+            binding = binding,
+            onBanksClickListener = onBanksClickListener
+        )
     }
 
     override fun getItemCount(): Int = users.size

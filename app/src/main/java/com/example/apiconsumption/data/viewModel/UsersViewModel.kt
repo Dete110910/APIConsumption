@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.apiconsumption.ui.screens.users.uiState.UsersUiState;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
-import com.example.apiconsumption.data.api.models.User
+
 import com.example.apiconsumption.data.api.retrofit.RetrofitService
 import kotlinx.coroutines.flow.MutableStateFlow;
 import kotlinx.coroutines.flow.StateFlow
