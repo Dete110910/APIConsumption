@@ -1,6 +1,7 @@
 package com.example.apiconsumption.data.api.retrofit
 
 import com.example.apiconsumption.data.api.models.Bank
+import com.example.apiconsumption.data.api.models.Beer
 import com.example.apiconsumption.data.api.models.User
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,5 +16,8 @@ interface ApiService {
 
     @GET("banks")
     suspend fun getBanks(): Bank
+
+    @GET("beers")
+    suspend fun getBeers(): Beer
 
 }

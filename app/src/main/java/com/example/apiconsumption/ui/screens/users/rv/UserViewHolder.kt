@@ -7,6 +7,7 @@ import com.example.apiconsumption.utils.loadSquareImage
 
 class UserViewHolder(
     private val onBanksClickListener: (user: User) -> Unit,
+    private val onBeersClickListener: (user: User) -> Unit,
     private val binding: UserViewBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -14,6 +15,10 @@ class UserViewHolder(
         with(binding){
             btnBanks.setOnClickListener{
                 onBanksClickListener(user)
+            }
+
+            btnBeers.setOnClickListener{
+                onBeersClickListener(user)
             }
             tvUserId.text = user.id.toString()
             tvUserFullName.text = "${user.firstName} ${user.lastName}"

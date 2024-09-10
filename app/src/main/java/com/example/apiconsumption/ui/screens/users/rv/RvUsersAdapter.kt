@@ -7,7 +7,8 @@ import com.example.apiconsumption.data.api.models.User
 import com.example.apiconsumption.databinding.UserViewBinding
 
 class RvUsersAdapter(
-    private val onBanksClickListener: (user: User) -> Unit
+    private val onBanksClickListener: (user: User) -> Unit,
+    private val onBeersClickListener: (user: User) -> Unit
 ) : RecyclerView.Adapter<UserViewHolder>(){
 
     var users = emptyList<User>()
@@ -20,7 +21,8 @@ class RvUsersAdapter(
         )
         return UserViewHolder(
             binding = binding,
-            onBanksClickListener = onBanksClickListener
+            onBanksClickListener = onBanksClickListener,
+            onBeersClickListener = onBeersClickListener
         )
     }
 

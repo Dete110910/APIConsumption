@@ -17,6 +17,7 @@ import com.example.apiconsumption.data.viewModel.UsersViewModel
 import com.example.apiconsumption.databinding.ActivityMainBinding
 import com.example.apiconsumption.ui.screens.banks.BanksActivity
 import com.example.apiconsumption.ui.screens.banks.BanksActivity.Companion.USER
+import com.example.apiconsumption.ui.screens.beers.BeersActivity
 import com.example.apiconsumption.ui.screens.users.rv.RvUsersAdapter
 
 
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         rvUsersAdapter = RvUsersAdapter(
             onBanksClickListener = { user ->
                 launchBanksActivity(user)
+            },
+
+            onBeersClickListener = { user ->
+                launchBeersActivity(user)
             }
         )
         binding.rvUsers.apply {
@@ -55,7 +60,6 @@ class MainActivity : AppCompatActivity() {
             userViewModel.uiState.collect { uiState ->
                 if (uiState.users.isNotEmpty()) {
                     rvUsersAdapter.users = uiState.users
-                    Log.d("TEST--", uiState.users.toString())
                     rvUsersAdapter.notifyDataSetChanged()
                 }
                 binding.rvUsers.visibility = if (uiState.isLoading) View.INVISIBLE else View.VISIBLE
@@ -69,6 +73,21 @@ class MainActivity : AppCompatActivity() {
             Intent(
                 this,
                 BanksActivity::class.java
+            ).apply {
+                putExtras(
+                    bundleOf(
+                        USER to user
+                    )
+                )
+            }
+        )
+    }
+
+    private fun launchBeersActivity(user: User){
+        startActivity(
+            Intent(
+                this,
+                BeersActivity::class.java
             ).apply {
                 putExtras(
                     bundleOf(

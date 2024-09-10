@@ -1,6 +1,5 @@
 package com.example.apiconsumption.data.viewModel;
 
-import android.util.Log
 import com.example.apiconsumption.ui.screens.users.uiState.UsersUiState;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope

@@ -2,10 +2,10 @@ package com.example.apiconsumption.data.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apiconsumption.data.api.models.Bank
+import com.example.apiconsumption.data.api.models.Beer
 import com.example.apiconsumption.data.api.models.User
 import com.example.apiconsumption.data.api.retrofit.RetrofitService
-import com.example.apiconsumption.ui.screens.banks.uiState.BanksUiState
+import com.example.apiconsumption.ui.screens.beers.uiState.BeersUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class BankViewModel : ViewModel() {
+class BeerViewModel : ViewModel() {
 
-    private val _uiState = MutableStateFlow(BanksUiState())
-    val uiState: StateFlow<BanksUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(BeersUiState())
+    val uiState: StateFlow<BeersUiState> = _uiState.asStateFlow()
 
     private lateinit var user: User
 
@@ -26,23 +26,23 @@ class BankViewModel : ViewModel() {
         viewModelScope.launch {
             val newUiState = _uiState.value.copy(
                 user = user,
-                isLoadingBanks = true
             )
             _uiState.value = newUiState
-            getBanks()
+
+            getBeers()
         }
     }
 
-    private suspend fun getBanks() {
-        val banks = arrayListOf<Bank>()
-        for (i in 1..2) {
+    private suspend fun getBeers() {
+        val beers = mutableListOf<Beer>()
+        for (i in 1..5) {
+            beers.add(retrofitApi.getBeers())
             delay(2500)
-            banks.add(retrofitApi.getBanks())
         }
         _uiState.update {
             _uiState.value.copy(
-                bankList = banks,
-                isLoadingBanks = false
+                isLoadingBeers = false,
+                beerList = beers
             )
         }
     }
