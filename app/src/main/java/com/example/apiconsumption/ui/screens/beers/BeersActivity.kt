@@ -48,27 +48,33 @@ class BeersActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initUiStateLifecycle() {
         lifecycleScope.launch {
-            beerViewModel.uiState.collect{ uiState ->
-                with(binding){
+            beerViewModel.uiState.collect { uiState ->
+                with(binding) {
                     uiState.user?.let { user ->
                         tvTitleHeader.context.getString(R.string.preferred_beers, user.firstName)
                         tvUserName.text = "${user.firstName} ${user.lastName}"
                         tvUserGender.text = user.gender
+                        tvTitleHeader.text = tvTitleHeader.context.getString(
+                            R.string.preferred_beers,
+                            user.firstName
+                        )
                         ivUserAvatar.loadSquareImage(user.avatar)
                     }
-                    if(uiState.beerList.isNotEmpty()){
+                    if (uiState.beerList.isNotEmpty()) {
                         rvBeersAdapter.beerList = uiState.beerList
                         rvBeersAdapter.notifyDataSetChanged()
                     }
 
-                    pbBeersInformation.visibility = if(uiState.isLoadingBeers) View.VISIBLE else View.INVISIBLE
-                    rvBeersInformation.visibility = if(uiState.isLoadingBeers.not()) View.VISIBLE else View.INVISIBLE
+                    pbBeersInformation.visibility =
+                        if (uiState.isLoadingBeers) View.VISIBLE else View.INVISIBLE
+                    rvBeersInformation.visibility =
+                        if (uiState.isLoadingBeers.not()) View.VISIBLE else View.INVISIBLE
                 }
             }
         }
     }
 
-    private fun getUser(){
+    private fun getUser() {
         val user = intent.extras?.getParcelable<User>(USER)
         user?.let {
             beerViewModel.setUser(user)

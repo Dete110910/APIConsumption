@@ -10,10 +10,11 @@ class BeersViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(beer: Beer) {
-        with(binding){
+        with(binding) {
             tvBeerBrand.text = beer.brand
             tvBeerName.text = beer.name
-            tvBeerAlcohol.text = tvBeerAlcohol.context.getString(R.string.beer_alcohol, beer.alcohol)
+            tvBeerAlcohol.text =
+                tvBeerAlcohol.context.getString(R.string.beer_alcohol, beer.alcohol)
         }
     }
 }

@@ -63,12 +63,13 @@ class MainActivity : AppCompatActivity() {
                     rvUsersAdapter.notifyDataSetChanged()
                 }
                 binding.rvUsers.visibility = if (uiState.isLoading) View.INVISIBLE else View.VISIBLE
-                binding.pbUsers.visibility = if (uiState.isLoading.not()) View.INVISIBLE else View.VISIBLE
+                binding.pbUsers.visibility =
+                    if (uiState.isLoading.not()) View.INVISIBLE else View.VISIBLE
             }
         }
     }
 
-    private fun launchBanksActivity(user: User){
+    private fun launchBanksActivity(user: User) {
         startActivity(
             Intent(
                 this,
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private fun launchBeersActivity(user: User){
+    private fun launchBeersActivity(user: User) {
         startActivity(
             Intent(
                 this,

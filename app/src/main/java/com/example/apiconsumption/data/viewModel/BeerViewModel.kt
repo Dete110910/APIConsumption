@@ -48,7 +48,9 @@ class BeerViewModel : ViewModel() {
     }
 
     fun setUser(user: User) {
-        this.user = user
-        getUserInformation()
+        if (this.uiState.value.user != user) {
+            this.user = user
+            getUserInformation()
+        }
     }
 }

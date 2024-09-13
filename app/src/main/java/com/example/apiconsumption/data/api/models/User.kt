@@ -14,4 +14,4 @@ data class User(
     val avatar: String,
     val gender: String,
     val email: String
-): Parcelable
+) : Parcelable

@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.apiconsumption.R
 import com.example.apiconsumption.data.api.models.User
 import com.example.apiconsumption.data.viewModel.BankViewModel
 import com.example.apiconsumption.databinding.ActivityBanksBinding
@@ -42,25 +43,31 @@ class BanksActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initUiStateLifecycle() {
         lifecycleScope.launch {
-            bankViewModel.uiState.collect{ uiState ->
-                with(binding){
+            bankViewModel.uiState.collect { uiState ->
+                with(binding) {
                     uiState.user?.let { user ->
-                        tvUserName.text = user.firstName + user.lastName
+                        tvUserName.text = "${user.firstName} ${user.lastName}"
                         tvUserEmail.text = user.email
+                        tvTitleHeader.text = tvTitleHeader.context.getString(
+                            R.string.subscribed_banks_by,
+                            user.firstName
+                        )
                         ivUserAvatar.loadSquareImage(user.avatar)
                     }
-                    if(uiState.bankList.isNotEmpty()){
+                    if (uiState.bankList.isNotEmpty()) {
                         rvBankAdapter.bankList = uiState.bankList
                         rvBankAdapter.notifyDataSetChanged()
                     }
-                    pbBanksInformation.visibility = if(uiState.isLoadingBanks) View.VISIBLE else View.INVISIBLE
-                    rvBanksInformation.visibility = if(uiState.isLoadingBanks.not()) View.VISIBLE else View.INVISIBLE
+                    pbBanksInformation.visibility =
+                        if (uiState.isLoadingBanks) View.VISIBLE else View.INVISIBLE
+                    rvBanksInformation.visibility =
+                        if (uiState.isLoadingBanks.not()) View.VISIBLE else View.INVISIBLE
                 }
             }
         }
     }
 
-    private fun getUser(){
+    private fun getUser() {
         val user = intent.extras?.getParcelable<User>(USER)
         user?.let {
             bankViewModel.setUser(user)

@@ -4,9 +4,10 @@
     <string name="beers">Beers</string>
     <string name="banks">Banks</string>
     <string name="subscription_to_banks">This user has subscription to this banks:</string>
-    <string name="preferred_beers">Prefered beers by: %1$s</string>
+    <string name="preferred_beers">Preferred beers by: %1$s</string>
     <string name="user_preferred_beers">The user preferred beers:</string>
     <string name="beer_brand">The beer\'s brand is: %1$s</string>
     <string name="beer_name">The beer\'s name is: %1$s</string>
     <string name="beer_alcohol">The beer\'s alcohol is: %1$s</string>
+    <string name="subscribed_banks_by">Subscribed banks by: %1$s</string>
 </resources>
